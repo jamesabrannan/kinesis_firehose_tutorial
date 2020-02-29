@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS
+
+  Sample SAM Template for AWS
+
+Globals:
+  Function:
+    Timeout: 60
+
+Resources:
+  KelvinConversionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: kelvinConversion/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+     # Events:
+      #  KelvinConversion:
+      #    Type: Api
+      #    Properties:
+       #     Path: /kelvinConversion
+       #     Method: get
+
+Outputs:
+ # KelvinConversionApi:
+   # Description: "API Gateway endpoint URL for Prod stage for Kelvin Conversion function"
+   # Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/kelvinConversion/"
+  KelvinConversionFunction:
+    Description: "Kelvin Conversion Lambda Function ARN"
+    Value: !GetAtt KelvinConversionFunction.Arn
+  KelvinConversionFunctionIamRole:
+    Description: "Implicit IAM Role created for Kelvin Conversion function"
+    Value: !GetAtt KelvinConversionFunctionRole.Arn
